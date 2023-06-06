@@ -6,15 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {get; private set;}
 
-    [SerializeField] float _guySpeed;
+    private float _guySpeed = 0f;
     public float GuySpeed => _guySpeed;
 
-    private bool _shouldGyuMove = true;
+    private bool _shouldGyuMove = false;
     public bool ShouldGuyMove => _shouldGyuMove;
+
+    [SerializeField] private GuyMover _guyMover;
+    [SerializeField] private DropCounter _dropCounter;
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance != null && Instance != this) // singleton stuff
         {
             Debug.LogWarning("Attempt to create additional instance of GameManager (singleton)");
             Destroy(gameObject);
@@ -28,5 +31,17 @@ public class GameManager : MonoBehaviour
     public void SetShouldMove(bool shouldMove)
     {
         _shouldGyuMove = shouldMove;
+    }
+
+    public void ResetGame()
+    {
+        SetShouldMove(false);
+        _guyMover.ResetPosition();
+        _dropCounter.ResetDropCount();
+    }
+
+    public void SetGuySpeed_kmh(float speed)
+    {
+        _guySpeed = speed / 3.6f;
     }
 }

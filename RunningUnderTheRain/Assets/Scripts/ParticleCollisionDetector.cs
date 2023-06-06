@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ParticleCollisionDetector : MonoBehaviour
 {
+    public System.Action OnCollisionDetected;
+
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log($"collided with {other}");
+        OnCollisionDetected?.Invoke();
     }
 
 }
