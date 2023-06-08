@@ -44,4 +44,9 @@ public class GameManager : MonoBehaviour
     {
         _guySpeed = speed / 3.6f;
     }
+
+    public void SetGuyAngle(float angle)
+    {
+        _guyMover.SetRotation(angle);
+    }
 }

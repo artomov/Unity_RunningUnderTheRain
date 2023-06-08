@@ -11,4 +11,9 @@ public class FinishTrigger : MonoBehaviour
             GameManager.Instance.SetShouldMove(false);
         }
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        OnTriggerEnter(other);
+    }
 }
